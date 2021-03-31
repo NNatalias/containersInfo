@@ -1,0 +1,41 @@
+<mat-toolbar class="title">Для поиска истории контейнера введите его номер</mat-toolbar>
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-subtitle style="color: crimson; font-size: larger;" *ngIf="(containerService.error$ | async) as error"></mat-card-subtitle>
+  </mat-card-header>
+      <mat-form-field style="width: 300px;">
+        <mat-label>Маркировочный номер контейнера</mat-label>
+        <input matInput class="form-control" name="num"
+               [(ngModel)]="container.num" #containerNum="ngModel" minlength="11" maxlength="11"
+               (keyup)="validator()">
+        <mat-hint>Номер состоит из 4 латинских букв и 7 римских цифр</mat-hint>
+      </mat-form-field>
+  <mat-card-subtitle style="color: crimson;margin-top: 1rem;" *ngIf="errorText">{{errorText}}</mat-card-subtitle>
+  <mat-card-actions>
+    <button mat-button type="submit" [disabled]="!allowSearch" (click)="searchContainer()">Поиск</button>
+    <button mat-button type="reset" [disabled]=!container.num (click)="containerNum.reset()" color="warn">Очистить</button>
+  </mat-card-actions>
+</mat-card>
+<div *ngIf="this.value">
+  <mat-progress-spinner color="accent" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+<div *ngIf="containerMainInfo">
+  <mat-card class="result-card">
+    <mat-card-header>
+      <mat-card-title>Уникальный номер: {{containerMainInfo.id}}</mat-card-title>
+      <mat-card-subtitle>Владелец: {{containerMainInfo.owner}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <div *ngFor="let historyEvent of containerMainInfo.history">
+            <div class="tableValue">Дата отправки: {{historyEvent.dateFrom}}</div>
+            <div class="tableValue">Дата доставки: {{historyEvent.dateTo}}</div>
+            <div class="tableValue">Исходный порт: {{historyEvent.sourcePort}}</div>
+            <div class="tableValue">Порт назначения: {{historyEvent.destinationPort}}</div>
+            <div class="tableValue">Отправитель: {{historyEvent.sender}}</div>
+            <div class="tableValue">Получатель:{{historyEvent.recipient}}</div>
+        <hr>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  </div>

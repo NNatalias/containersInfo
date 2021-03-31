@@ -1,0 +1,10 @@
+.card{
+  text-align: center;
+}
+.result-card{
+  margin-top: 1%;
+}
+@media (max-width: 550px) {
+  .title{
+    font-size: large;
+  }}
