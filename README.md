@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 # 1)Clone this repository
 
-$ git clone https://github.com/vafin1994/containerSearchApp.git
+$ git clone 
 
 # 2)Open respository
 
